@@ -10,5 +10,6 @@ func _physics_process(delta):
 	var up = Input.is_action_pressed(UP_KEY)
 	var down = Input.is_action_pressed(DOWN_KEY)
 	
+	velocity.x = 0
 	velocity.y = (int(down) - int(up)) * SPEED
 	velocity = move_and_slide(velocity)
