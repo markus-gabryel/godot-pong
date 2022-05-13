@@ -10,7 +10,8 @@ func _ready():
 	
 func _physics_process(delta):	
 	if get_slide_count() >= 1:
-		handle_collision(get_slide_collision(0))
+		var collision = get_slide_collision(0)
+		handle_collision(collision)
 	
 	move_and_slide(velocity)
 
@@ -19,9 +20,5 @@ func handle_collision(collision):
 
 	if abs(direction.x) > abs(direction.y):
 		velocity.x *= -1
-		print("left-right")
 	else:
 		velocity.y *= -1
-		print("up-down")
-	
-	

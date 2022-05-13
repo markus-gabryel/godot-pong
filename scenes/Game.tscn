@@ -1,8 +1,11 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://arts/ball.png" type="Texture" id=2]
 [ext_resource path="res://scripts/Ball.gd" type="Script" id=3]
+[ext_resource path="res://arts/slkscr.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://scripts/HUD.gd" type="Script" id=5]
+[ext_resource path="res://scenes/Goal.tscn" type="PackedScene" id=6]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 8.0
@@ -30,6 +33,28 @@ color_ramp = SubResource( 5 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 512, 10 )
+
+[sub_resource type="DynamicFont" id=8]
+size = 100
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=16]
+size = 40
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=10]
+size = 44
+font_data = ExtResource( 4 )
+
+[sub_resource type="StyleBoxEmpty" id=11]
+
+[sub_resource type="StyleBoxEmpty" id=12]
+
+[sub_resource type="StyleBoxEmpty" id=13]
+
+[sub_resource type="StyleBoxEmpty" id=14]
+
+[sub_resource type="StyleBoxEmpty" id=15]
 
 [node name="Game" type="Node2D"]
 
@@ -66,3 +91,75 @@ shape = SubResource( 2 )
 [node name="Bottom" type="CollisionShape2D" parent="Walls"]
 position = Vector2( 512, 610 )
 shape = SubResource( 2 )
+
+[node name="Goal1" parent="." instance=ExtResource( 6 )]
+player = "Player 1"
+
+[node name="Goal2" parent="." instance=ExtResource( 6 )]
+position = Vector2( -10, 300 )
+player = "Player 2"
+
+[node name="HUD" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 1024.0
+margin_bottom = 600.0
+script = ExtResource( 5 )
+
+[node name="VictoryPanel" type="Control" parent="HUD"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -512.0
+margin_top = -300.0
+margin_right = 512.0
+margin_bottom = 300.0
+
+[node name="VictoryText" type="Label" parent="HUD/VictoryPanel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -237.5
+margin_top = -50.5
+margin_right = 237.5
+margin_bottom = 50.5
+custom_fonts/font = SubResource( 8 )
+text = "VICTORY"
+align = 1
+valign = 1
+
+[node name="PlayerName" type="Label" parent="HUD/VictoryPanel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -110.0
+margin_top = 50.0
+margin_right = 110.0
+margin_bottom = 91.0
+custom_fonts/font = SubResource( 16 )
+text = "Player X"
+
+[node name="RetryButton" type="Button" parent="HUD/VictoryPanel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -97.0
+margin_top = 200.0
+margin_right = 97.0
+margin_bottom = 251.0
+custom_fonts/font = SubResource( 10 )
+custom_styles/hover = SubResource( 11 )
+custom_styles/pressed = SubResource( 12 )
+custom_styles/focus = SubResource( 13 )
+custom_styles/disabled = SubResource( 14 )
+custom_styles/normal = SubResource( 15 )
+text = "Retry?"
+
+[connection signal="player_won" from="Goal1" to="HUD" method="_on_Goal_player_won"]
+[connection signal="player_won" from="Goal2" to="HUD" method="_on_Goal_player_won"]
+[connection signal="pressed" from="HUD/VictoryPanel/RetryButton" to="HUD" method="_on_RetryButton_pressed"]
