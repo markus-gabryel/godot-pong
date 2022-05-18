@@ -22,3 +22,7 @@ func handle_collision(collision):
 		velocity.x *= -1
 	else:
 		velocity.y *= -1
+		
+func change_direction():
+	var directions = [Vector2(-1, -1), Vector2(-1, 1), Vector2(1, -1), Vector2(1, 1)]
+	velocity = directions[randi() % 4] * SPEED
