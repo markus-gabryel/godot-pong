@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://arts/ball.png" type="Texture" id=2]
@@ -56,6 +56,10 @@ font_data = ExtResource( 4 )
 
 [sub_resource type="StyleBoxEmpty" id=15]
 
+[sub_resource type="DynamicFont" id=17]
+size = 30
+font_data = ExtResource( 4 )
+
 [node name="Game" type="Node2D"]
 
 [node name="Player1" parent="." instance=ExtResource( 1 )]
@@ -69,6 +73,7 @@ DOWN_KEY = "ui_page_down"
 [node name="Ball" type="KinematicBody2D" parent="."]
 position = Vector2( 512, 300 )
 script = ExtResource( 3 )
+SPAWN_POINT = Vector2( 512, 300 )
 SPEED = 300.0
 
 [node name="Sprite" type="Sprite" parent="Ball"]
@@ -165,6 +170,7 @@ margin_left = 1.0
 margin_top = 2.0
 margin_right = 80.0
 margin_bottom = 46.0
+custom_fonts/font = SubResource( 17 )
 text = "00"
 align = 1
 valign = 1
@@ -174,10 +180,17 @@ margin_left = 945.0
 margin_top = 2.0
 margin_right = 1024.0
 margin_bottom = 46.0
+custom_fonts/font = SubResource( 17 )
 text = "00"
 align = 1
 valign = 1
 
-[connection signal="player_won" from="Goal1" to="HUD" method="_on_Goal_player_won"]
-[connection signal="player_won" from="Goal2" to="HUD" method="_on_Goal_player_won"]
+[connection signal="player_score_update" from="Goal1" to="Ball" method="_on_Goal_player_score_update"]
+[connection signal="player_score_update" from="Goal1" to="HUD" method="_on_Goal1_player_score_update"]
+[connection signal="player_won" from="Goal1" to="Ball" method="_on_Goal_player_won"]
+[connection signal="player_won" from="Goal1" to="HUD" method="_on_Goal1_player_won"]
+[connection signal="player_score_update" from="Goal2" to="Ball" method="_on_Goal_player_score_update"]
+[connection signal="player_score_update" from="Goal2" to="HUD" method="_on_Goal2_player_score_update"]
+[connection signal="player_won" from="Goal2" to="Ball" method="_on_Goal_player_won"]
+[connection signal="player_won" from="Goal2" to="HUD" method="_on_Goal2_player_won"]
 [connection signal="pressed" from="HUD/VictoryPanel/RetryButton" to="HUD" method="_on_RetryButton_pressed"]
