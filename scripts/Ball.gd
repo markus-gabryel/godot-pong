@@ -1,12 +1,14 @@
 extends KinematicBody2D
 
 export var SPEED : float
+var real_speed
 
 var velocity : Vector2 
 
 func _ready():
 	var directions = [Vector2(-1, -1), Vector2(-1, 1), Vector2(1, -1), Vector2(1, 1)]
 	velocity = directions[randi() % 4] * SPEED
+	real_speed = SPEED
 	
 func _physics_process(delta):	
 	if get_slide_count() >= 1:
@@ -26,3 +28,9 @@ func handle_collision(collision):
 func change_direction():
 	var directions = [Vector2(-1, -1), Vector2(-1, 1), Vector2(1, -1), Vector2(1, 1)]
 	velocity = directions[randi() % 4] * SPEED
+	
+func stop_ball():
+	SPEED = 0
+	
+func restart_ball():
+	SPEED = real_speed

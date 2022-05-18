@@ -12,4 +12,7 @@ func _on_Goal_body_entered(body):
 		body.position = Vector2(512,300)
 		body.change_direction()
 		player_score += 1
+		if player_score == 2:
+			emit_signal("player_won", player)
+			get_tree().call_group("Ball", "stop_ball")
 		print(player," ", player_score, " points")
