@@ -64,11 +64,13 @@ font_data = ExtResource( 4 )
 
 [node name="Player1" parent="." instance=ExtResource( 1 )]
 position = Vector2( 32, 300 )
+UP_KEY = "ui_player1_up"
+DOWN_KEY = "ui_player1_down"
 
 [node name="Player2" parent="." instance=ExtResource( 1 )]
 position = Vector2( 992, 300 )
-UP_KEY = "ui_page_up"
-DOWN_KEY = "ui_page_down"
+UP_KEY = "ui_player2_up"
+DOWN_KEY = "ui_player2_down"
 
 [node name="Ball" type="KinematicBody2D" parent="."]
 position = Vector2( 512, 300 )
