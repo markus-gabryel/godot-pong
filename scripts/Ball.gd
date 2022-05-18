@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+signal hitted
+
 const DIRECTIONS = [Vector2(-1, -1), Vector2(-1, 1), Vector2(1, -1), Vector2(1, 1)]
 
 export var SPAWN_POINT : Vector2
@@ -24,6 +26,8 @@ func handle_collision(collision):
 		velocity.x *= -1
 	else:
 		velocity.y *= -1
+	
+	emit_signal("hitted")
 
 func change_direction():
 	velocity = DIRECTIONS[randi() % len(DIRECTIONS)] * SPEED

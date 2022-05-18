@@ -17,3 +17,15 @@ func _on_Goal1_player_won():
 func _on_Goal2_player_won():
 	$VictoryPanel/PlayerName.text = "Player 2"
 	$VictoryPanel.show()
+
+func _on_Ball_hitted():
+	if $Feedback.text == "PING!":
+		$Feedback.text = "PONG!"
+	else:
+		$Feedback.text = "PING!"
+	
+	$Feedback.show()
+	$FeedbackTimer.start()
+
+func _on_BallFeedbackTimer_timeout():
+	$Feedback.hide()

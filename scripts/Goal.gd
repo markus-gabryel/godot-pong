@@ -8,9 +8,6 @@ export var score = 0
 
 func _on_Goal_body_entered(body):
 	if body.name == "Ball":
-		#body.position = Vector2(512,300)
-		#body.change_direction()
-		
 		score += 1
 		emit_signal("player_score_update", score)
 		
