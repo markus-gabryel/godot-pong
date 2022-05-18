@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://scripts/Menu.gd" type="Script" id=1]
 [ext_resource path="res://arts/slkscr.ttf" type="DynamicFontData" id=2]
@@ -26,6 +26,9 @@ shortcut = SubResource( 2 )
 
 [sub_resource type="DynamicFont" id=1]
 size = 150
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=10]
 font_data = ExtResource( 2 )
 
 [node name="Menu" type="Control"]
@@ -65,5 +68,19 @@ margin_right = 223.0
 margin_bottom = 151.0
 custom_fonts/font = SubResource( 1 )
 text = "Pong"
+
+[node name="Label2" type="Label" parent="."]
+margin_left = 289.0
+margin_top = 449.0
+margin_right = 735.0
+margin_bottom = 600.0
+custom_fonts/font = SubResource( 10 )
+text = "made by: pogaum studios
+group: as caras do crime 2
+leandro santiago
+markus gabryel
+wadrian aráaujo"
+align = 1
+valign = 1
 
 [connection signal="pressed" from="Button" to="Button" method="_on_Play_Button_pressed"]
